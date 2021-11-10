@@ -19,10 +19,40 @@ detectArbitrage
 """
 def detectArbitrage(adjList, adjMat, tol=1e-15):
     ##### Your implementation goes here. #####
-    return []
-    ##### Your implementation goes here. #####
 
-################################################################################
+    
+    start = None
+    for v in adjList:
+        for neigh in v.neigh:
+            if neigh.dist > v.dist + adjMat[v.rank][neigh.rank] + tol:
+                neigh.dist = v.dist + adjMat[v.rank][neigh.rank]
+                neigh.prev = v
+                start = neigh.prev
+
+    if start is None:
+        return []
+
+    x = [0 for vertex in adjList]
+
+    while x[start.rank] == 0:
+            x[start.rank] += 1
+            start = start.prev
+            start_ = start
+
+            path = [start_.rank]
+            while start.prev != start_:
+                start = start.prev
+                path.append(start.rank)
+                path.append(start.prev.rank)
+
+            path.reverse()
+            return path
+
+
+
+
+    
+
 
 """
 rates2mat
