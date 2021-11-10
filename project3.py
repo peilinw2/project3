@@ -28,10 +28,9 @@ def detectArbitrage(adjList, adjMat, tol=1e-15):
 rates2mat
 """
 def rates2mat(rates):
-    ##### Your implementation goes here. #####
-    # Currently this only returns a copy of the rates matrix.
-    return [[R for R in row] for row in rates]
-    ##### Your implementation goes here. #####
+   
+    return [[ -math.log(R) for R in row] for row in rates]
+    
 
 """
 Main function.
