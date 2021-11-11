@@ -17,16 +17,31 @@ from p3tests import *
 """
 detectArbitrage
 """
-def detectArbitrage(adjList, adjMat, tol=1e-15):
-    ##### Your implementation goes here. #####
 
-    
+def detectArbitrage(adjList, adjMat, tol=1e-15):
+
+    for vertex in adjList:
+        vertex.dist = math.inf
+        vertex.prev = None
+    adjList[0].dist = 0
+
+
+    for iter in range(0, len(adjList) - 1):
+
+
+        for vertex in adjList:
+            for neigh in vertex.neigh:
+                if neigh.dist > vertex.dist + adjMat[vertex.rank][neigh.rank] + tol:
+                    neigh.dist = vertex.dist + adjMat[vertex.rank][neigh.rank]
+                    neigh.prev = vertex
+
+
     start = None
-    for v in adjList:
-        for neigh in v.neigh:
-            if neigh.dist > v.dist + adjMat[v.rank][neigh.rank] + tol:
-                neigh.dist = v.dist + adjMat[v.rank][neigh.rank]
-                neigh.prev = v
+    for vertex in adjList:
+        for neigh in vertex.neigh:
+            if neigh.dist > vertex.dist + adjMat[vertex.rank][neigh.rank] + tol:
+                neigh.dist = vertex.dist + adjMat[vertex.rank][neigh.rank]
+                neigh.prev = vertex
                 start = neigh.prev
 
     if start is None:
@@ -47,7 +62,6 @@ def detectArbitrage(adjList, adjMat, tol=1e-15):
 
             path.reverse()
             return path
-
 
 
 
