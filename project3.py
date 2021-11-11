@@ -16,6 +16,11 @@ from p3tests import *
 
 """
 detectArbitrage
+Function:implements the Bellman-Ford algorithm to detect and report a negative cost cycle in the currency graph
+Inputs: adjList: the adjacency list of Vertex objects; 
+adjMat: the adjacency matrix (stored as a 2D list);
+tol:a value that is set at 1e-15
+Outpus:the path of vertex that is consistent with the negative cost cycles
 """
 
 def detectArbitrage(adjList, adjMat, tol=1e-15):
