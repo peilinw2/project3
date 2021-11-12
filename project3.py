@@ -81,7 +81,7 @@ def detectArbitrage(adjList, adjMat, tol=1e-15):
 rates2mat
 """
 def rates2mat(rates):
-#retur  the adjacency matrix with the correctly weighted edges.   
+#return  the adjacency matrix with the correctly weighted edges.   
     return [[ -math.log(R) for R in row] for row in rates]
     
 
